@@ -21,3 +21,13 @@ var cs = app.get("channelService");
 cs.pushMessageByUids("testroute",{"msg":"test"},[{uid:10001,sid:"testServerId"}],{},function(){
     console.log("push done.")
 })
+
+var path = require("path");
+var serverdir = path.resolve(__dirname,"./servers");
+app.mockrpc(serverdir);
+
+
+// console.log(app.rpc.is.inst.forwardMessage.toServer.toString());
+app.rpc.is.inst.forwardMessage.toServer("testServerId",{msg:"test"},{session:1},function(){
+    console.log("forwardMessage call done.")
+})
